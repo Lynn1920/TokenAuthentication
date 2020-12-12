@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="Scripts/jquery-3.3.1.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#btnregister').click(function () {
+                var email = $('#txtemail').val();
+                var password = $('#txtpassword').val();
+                var confirmpassword = $('#txtconfirmpassword').val();
+                $.ajax({
+                    url: 'api/values/register',
+                    method: 'POST',
+                    data: {
+                        email: $('#txtemail').val(),
+                        password: $('#txtpassword').val(),
+                        confirmpassword:$('#txtconfirmpassword').val()
+                    },
+                    success: function () {
+                        $('#successmodal').modal('show');
+                    },
+                    error: function (jqxhr) {
+                        $('#diverrortext').text(jqxhr.responseText);
+                        $('#diverror').show('fade');
+                    }
+                });
+                
+                
+            });
+
+            $('#linkclose').click(function () {
+                $('#diverror').hide('fade');
+            });
+
+
+        });
+
+    </script>
+</head>
+<body style="padding-top:20px">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="well">
+            <table class="table table-bordered">
+                <thead>
+                    <tr class="success">
+                        <td colspan="2">
+                            New User Registration
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Email</td>
+                        <td><input type="text" id="txtemail" placeholder="Email" /></td>
+                    </tr>
+                    <tr>
+                        <td>Password</td>
+                        <td><input type="password" id="txtpassword" placeholder="Email" /></td>
+                    </tr>
+                    <tr>
+                        <td>Confirm Password</td>
+                        <td><input type="password" id="txtconfirmpassword" placeholder="Email" /></td>
+                    </tr>
+                    <tr class="success">
+                        <td colspan="2">
+                            <input type="button" class="btn btn-success" id="btnregister" value="Register" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="modal fade" tabindex="-1" id="successmodal" data-keyboard="false" data-backdrop="static">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">
+                                &times;
+                            </button>
+                            <h4>Success</h4>
+                        </div>
+                        <div class="modal-body">
+                            <h2>Registration Succesful</h2>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" data-dismiss="modal" class="btn btn-success">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="diverror" class="alert alert-danger collapse">
+                <a id="linkclose" class="close" href="#">&times;</a>
+                <div id="diverrortext"></div>
+            </div>
+        </div>
+        </div>
+</body>
+</html>
+
+<!--
+    data-keyboard false means when we press esc key modal will not close
+    data-backdrop ="static" means it prevents modal from closing when we press anywhere else other than modal
+    
+    -->

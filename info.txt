@@ -1,0 +1,4 @@
+install-package Microsoft.AspNet.identity.Owin
+install-package Microsoft.Owin.host.SystemWeb
+install-package Microsoft.AspNet.Identity.EntityFramework	
+install-package Owin.Context -Version 0.1.0.3
